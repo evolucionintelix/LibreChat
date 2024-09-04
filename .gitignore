@@ -109,3 +109,5 @@ release/
 *.key
 *.crt
 utils/certs/dhparam
+
+/utils/certs
