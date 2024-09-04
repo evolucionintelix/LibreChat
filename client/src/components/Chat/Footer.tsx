@@ -43,7 +43,7 @@ export default function Footer({ className }: { className?: string }) {
 
   const mainContentParts = (
     typeof config?.customFooter === 'string'
-      ? config.customFooter
+      ? config.customFooter + Constants.VERSION
       : '[LibreChat ' +
         Constants.VERSION +
         '](https://librechat.ai) - ' +

@@ -97,6 +97,8 @@ export default {
   com_ui_upload_files: 'Subir archivos',
   com_ui_prompt_templates: 'Plantillas de Prompt',
   com_ui_hide_prompt_templates: 'Ocultar Plantillas de Prompt',
+  com_ui_create_prompt: 'Crear Prompt',
+  com_ui_filter_prompts_name: 'Filtrar prompts por nombre',
   com_ui_showing: 'Mostrando',
   com_ui_of: 'de',
   com_ui_entries: 'Entradas',
@@ -140,6 +142,7 @@ export default {
   com_ui_share: 'Compartir',
   com_ui_copy_link: 'Copiar enlace',
   com_ui_update_link: 'Actualizar enlace',
+  com_ui_back_to_chat: 'Regresar al Chat',
   com_ui_create_link: 'Crear enlace',
   com_ui_share_link_to_chat: 'Compartir enlace en el chat',
   com_ui_share_error: 'Hubo un error al compartir el enlace del chat',
@@ -185,10 +188,8 @@ export default {
   com_ui_bookmarks_update_error: 'Hubo un error al actualizar el marcador',
   com_ui_bookmarks_delete_error: 'Hubo un error al eliminar el marcador',
   com_ui_bookmarks_add_to_conversation: 'Agregar a la conversación actual',
-  com_ui_accept: 'Acepto',
-  com_ui_decline: 'No acepto',
-  com_ui_terms_and_conditions: 'Términos y Condiciones',
-  com_ui_no_terms_content: 'No hay contenido de términos y condiciones para mostrar',
+  com_ui_bookmarks_filter: 'Filtrar marcadores...',
+  com_ui_no_bookmarks: 'Parece que aún no tienes marcadores. Haz clic en un chat y añade uno nuevo.',
   com_auth_error_login:
     'No se puede iniciar sesión con la información proporcionada. Verifique sus credenciales y vuelva a intentarlo.',
   com_auth_error_login_rl:
@@ -246,7 +247,7 @@ export default {
   com_auth_click_here: 'Haz clic aquí',
   com_auth_to_try_again: 'para intentar de nuevo.',
   com_auth_submit_registration: 'Enviar registro',
-  com_auth_welcome_back: 'Bienvenido de nuevo',
+  com_auth_welcome_back: 'IA Intelix - Chat',
   com_auth_back_to_login: 'Volver al inicio de sesión',
   com_endpoint_open_menu: 'Abrir menú',
   com_endpoint_bing_enable_sydney: 'Habilitar Sydney',
@@ -435,7 +436,7 @@ export default {
   com_nav_plugin_store: 'Tienda de plugins',
   com_nav_plugin_install: 'Instalar',
   com_nav_plugin_uninstall: 'Desinstalar',
-  com_ui_add: 'Agregar',
+  com_nav_tool_add: 'Agregar',
   com_nav_tool_remove: 'Eliminar',
   com_nav_tool_dialog: 'Herramientas del asistente',
   com_nav_tool_dialog_description:
@@ -502,6 +503,7 @@ export default {
   com_nav_language: 'Idioma',
   com_nav_lang_auto: 'Detección automática',
   com_nav_lang_spanish: 'Español',
+  com_nav_auto_send_prompts: 'Auto-enviar Prompts',
   /* The following are AI Translated */
   com_assistants_file_search: 'Búsqueda de Archivos',
   com_assistants_file_search_info:
@@ -535,6 +537,7 @@ export default {
   com_ui_date_december: 'Diciembre',
   com_ui_nothing_found: 'No se encontró nada',
   com_ui_go_to_conversation: 'Ir a la conversación',
+  com_ui_clear_all: 'Limpiar todo',
   com_error_moderation:
     'Parece que el contenido enviado ha sido marcado por nuestro sistema de moderación por no estar alineado con nuestras pautas comunitarias. No podemos proceder con este tema específico. Si tiene alguna otra pregunta o tema que le gustaría explorar, por favor edite su mensaje o cree una nueva conversación.',
   com_error_no_user_key:
@@ -2157,7 +2160,7 @@ export const comparisons = {
     english: 'Uninstall',
     translated: 'Desinstalar',
   },
-  com_ui_add: {
+  com_nav_tool_add: {
     english: 'Add',
     translated: 'Agregar',
   },
@@ -2251,19 +2254,19 @@ export const comparisons = {
   },
   com_nav_shared_links_manage: {
     english: 'Manage',
-    translated: 'Gerenciar',
+    translated: 'Gestionar',
   },
   com_nav_shared_links_empty: {
     english: 'You have no shared links.',
-    translated: 'Você não tem nenhum link compartilhado.',
+    translated: 'Ud no tiene enlaces compartidos.',
   },
   com_nav_shared_links_name: {
     english: 'Name',
-    translated: 'Nome',
+    translated: 'Nombre',
   },
   com_nav_shared_links_date_shared: {
     english: 'Date shared',
-    translated: 'Data compartilhada',
+    translated: 'Data compartida',
   },
   com_nav_my_files: {
     english: 'My Files',
