@@ -106,4 +106,8 @@ uploads/
 
 # owner
 release/
+*.key
+*.crt
+utils/certs/dhparam
+
 /utils/certs
