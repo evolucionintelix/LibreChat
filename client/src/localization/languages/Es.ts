@@ -370,6 +370,7 @@ export default {
   com_endpoint_assistant: 'Asistente',
   com_endpoint_use_active_assistant: 'Utilizar asistente activo',
   com_endpoint_assistant_model: 'Modelo de asistente',
+  com_endpoint_search: 'Busca endpoint por nombre',
   com_endpoint_save_as_preset: 'Guardar como configuración preestablecida',
   com_endpoint_presets_clear_warning:
     '¿Estás seguro de que quieres borrar todas las configuraciones preestablecidas? Esto es irreversible.',
