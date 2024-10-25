@@ -1,4 +1,4 @@
-// Spanish phrases
+// Spanish phrases ajustado
 // file deepcode ignore NoHardcodedPasswords: No hardcoded values present in this file
 // file deepcode ignore HardcodedNonCryptoSecret: No hardcoded secrets present in this file
 
