@@ -5,14 +5,17 @@ const { createCodeExecutionTool, EnvVar } = require('@librechat/agents');
 const { getUserPluginAuthValue } = require('~/server/services/PluginService');
 const {
   availableTools,
+  manifestToolMap,
   // Basic Tools
   GoogleSearchAPI,
   // Structured Tools
   DALLE3,
+  OpenWeather,
   StructuredSD,
   StructuredACS,
   TraversaalSearch,
   StructuredWolfram,
+  createYouTubeTools,
   TavilySearchResults,
 } = require('../');
 const { primeFiles: primeCodeFiles } = require('~/server/services/Files/Code/process');
@@ -146,6 +149,14 @@ const loadToolWithAuth = (userId, authFields, ToolConstructor, options = {}) => 
 };
 
 /**
+ * @param {string} toolKey
+ * @returns {Array<string>}
+ */
+const getAuthFields = (toolKey) => {
+  return manifestToolMap[toolKey]?.authConfig.map((auth) => auth.authField) ?? [];
+};
+
+/**
  *
  * @param {object} object
  * @param {string} object.user
@@ -173,6 +184,7 @@ const loadTools = async ({
   const toolConstructors = {
     calculator: Calculator,
     google: GoogleSearchAPI,
+    open_weather: OpenWeather,
     wolfram: StructuredWolfram,
     'stable-diffusion': StructuredSD,
     'azure-ai-search': StructuredACS,
@@ -182,15 +194,22 @@ const loadTools = async ({
 
   const customConstructors = {
     serpapi: async () => {
-      let apiKey = process.env.SERPAPI_API_KEY;
+      const authFields = getAuthFields('serpapi');
+      let envVar = authFields[0] ?? '';
+      let apiKey = process.env[envVar];
       if (!apiKey) {
-        apiKey = await getUserPluginAuthValue(user, 'SERPAPI_API_KEY');
+        apiKey = await getUserPluginAuthValue(user, envVar);
       }
       return new SerpAPI(apiKey, {
         location: 'Austin,Texas,United States',
         hl: 'en',
         gl: 'us',
       });
+    },
+    youtube: async () => {
+      const authFields = getAuthFields('youtube');
+      const authValues = await loadAuthValues({ userId: user, authFields });
+      return createYouTubeTools(authValues);
     },
   };
 
@@ -216,18 +235,9 @@ const loadTools = async ({
     'stable-diffusion': imageGenOptions,
   };
 
-  const toolAuthFields = {};
-
-  availableTools.forEach((tool) => {
-    if (customConstructors[tool.pluginKey]) {
-      return;
-    }
-
-    toolAuthFields[tool.pluginKey] = tool.authConfig.map((auth) => auth.authField);
-  });
-
   const toolContextMap = {};
   const remainingTools = [];
+  const appTools = options.req?.app?.locals?.availableTools ?? {};
 
   for (const tool of tools) {
     if (tool === Tools.execute_code) {
@@ -259,7 +269,7 @@ const loadTools = async ({
         return createFileSearchTool({ req: options.req, files, entity_id: agent?.id });
       };
       continue;
-    } else if (mcpToolPattern.test(tool)) {
+    } else if (tool && appTools[tool] && mcpToolPattern.test(tool)) {
       requestedTools[tool] = async () =>
         createMCPTool({
           req: options.req,
@@ -279,7 +289,7 @@ const loadTools = async ({
       const options = toolOptions[tool] || {};
       const toolInstance = loadToolWithAuth(
         user,
-        toolAuthFields[tool],
+        getAuthFields(tool),
         toolConstructors[tool],
         options,
       );
